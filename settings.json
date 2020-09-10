@@ -1,15 +1,12 @@
 {
-	"root_dir": ".",
+	"root_dir": "/public",
 	"log_path": "./log.txt",
-
 	"port": "8080",
-
 	"allowed_any_extensions": false,
 	"allowed_extensions": [
 		".html", ".css", ".js", ".json", ".txt",
 		".jpeg", ".jpg", ".png", ".ico"
 	],
-
 	"use_custom_not_found_page": false,
 	"custom_not_found_page_path": "./404.html"
 }
