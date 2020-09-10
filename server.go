@@ -126,14 +126,16 @@ func setup() {
 	}
 	s.RootDir = absPath(execDir, s.RootDir)
 	s.LogPath = absPath(execDir, s.LogPath)
-	s.CustomNotFoundPagePath = absPath(execDir, s.CustomNotFoundPagePath)
 
 	// load custom not found page
-	data, err := ioutil.ReadFile(s.CustomNotFoundPagePath)
-	if err != nil {
-		log.Fatal(err)
+	if s.UseCustomNotFoundPage {
+		s.CustomNotFoundPagePath = absPath(execDir, s.CustomNotFoundPagePath)
+		data, err := ioutil.ReadFile(s.CustomNotFoundPagePath)
+		if err != nil {
+			log.Fatal(err)
+		}
+		customNotFoundPageRaw = string(data)
 	}
-	customNotFoundPageRaw = string(data)
 	
 	// set logger
 	f, err := os.OpenFile(s.LogPath, os.O_APPEND | os.O_CREATE | os.O_WRONLY, 0644)
