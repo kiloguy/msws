@@ -4,7 +4,7 @@ msws stands for **M**ini **S**tatic **W**eb **S**erver, a static HTTP server for
 ## Build and Run
 Use [go get](https://golang.org/pkg/cmd/go/internal/get/) or `git clone` to download the repository. Then,
 ```
-$ go build -o server.go && ./server
+$ go build -o server server.go && ./server
 ```
 
 ## Configuration

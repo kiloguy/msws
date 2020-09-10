@@ -83,10 +83,13 @@ func main() {
 	m := mux{}
 
 	setup()
+	log.Println("Server initialized.")
 	server := http.Server{Addr: ":" + s.Port, Handler: m}
 
 	go waitSignal(&server)
-
+	
+	fmt.Println("Listen on port " + s.Port + "...")
+	fmt.Println("Press Ctrl-C (or send SIGINT, SIGTERM or SIGHUP to this process) to shutdown...")
 	err := server.ListenAndServe()
 	if err != nil {
 		// maybe exit normally
@@ -94,7 +97,7 @@ func main() {
 	}
 }
 
-// shutdown server when receive any signal
+// shutdown server when receive certain signal
 func waitSignal(s *http.Server) {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
