@@ -1,5 +1,5 @@
 {
-	"root_dir": "/public",
+	"root_dir": ".",
 	"log_path": "./log.txt",
 	"port": "8080",
 	"allowed_any_extensions": false,

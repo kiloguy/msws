@@ -32,6 +32,7 @@ var customNotFoundPageRaw string
 
 func (m mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	URL := r.URL.EscapedPath()
+	extension := filepath.Ext(URL)
 	log.Println("Request from " + r.RemoteAddr + " " + "[" + URL + "]")
 
 	notFound := false
@@ -43,7 +44,6 @@ func (m mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			notFound = true
 		}
 	} else {
-		extension := filepath.Ext(URL)
 		if extension == "" {
 			notFound = true
 		} else {
@@ -74,6 +74,11 @@ func (m mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 		log.Println("Response to " + r.RemoteAddr + " " + "[" + URL + "]: Not found.")
 		return
+	}
+
+	if extension == ".css" {
+		// fix css MIME type problem
+		w.Header().Set("Content-Type", "text/css")
 	}
 	fmt.Fprint(w, string(data))
 	log.Println("Response to " + r.RemoteAddr + " " + "[" + URL + "]: Success.")
